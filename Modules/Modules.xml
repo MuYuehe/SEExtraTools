@@ -1,0 +1,11 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/..\FrameXML\UI.xsd">
+    
+    <Include file = "Data\Data.xml" />
+    <Include file = "UI\Layout.xml" />
+
+    <Script file  = "Core.lua" />
+    <Include file = "ChatFilter\ChatFilter.xml" />
+    <Include file = "SellJunk\SellJunk.xml" />
+    <Include file = "UnitIcon\UnitIcon.xml" />
+    <Include file = "Test\Test.xml" />
+</Ui>

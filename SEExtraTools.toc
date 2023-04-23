@@ -1,0 +1,11 @@
+## Interface: 100007
+## Title: |cff87CEEBS|r|cffEF5555E|r|cffA0522DE|r|cff6ED73Ax|r|cffFE4500t|r|cff3399EAra|r|cffFFFFFFTools|r
+## Author: 汐染晨风
+## Version: 1.0.0
+## Dependencies: Scorpio
+## DefaultState: Enabled
+## LoadOnDemand: 0
+## SavedVariables: SEExtraTools_DB, SEExtraTools_NPCData_DB
+## SavedVariablesPerCharacter: SEExtraTools_DB_Char
+
+SEExtraTools.xml

@@ -1,0 +1,15 @@
+Scorpio "SEExtraTools.core.chatfilter.handler" ""
+
+ChatFrame_AddMessageEventFilter("CHAT_MSG_CHANNEL",         MapFilter)
+ChatFrame_AddMessageEventFilter("CHAT_MSG_SAY",             MapFilter)
+ChatFrame_AddMessageEventFilter("CHAT_MSG_YELL",            MapFilter)
+ChatFrame_AddMessageEventFilter("CHAT_MSG_WHISPER",         MapFilter)
+ChatFrame_AddMessageEventFilter("CHAT_MSG_BN_WHISPER",      MapFilter)
+ChatFrame_AddMessageEventFilter("CHAT_MSG_WHISPER_INFORM",  MapFilter)
+ChatFrame_AddMessageEventFilter("CHAT_MSG_RAID",            MapFilter)
+ChatFrame_AddMessageEventFilter("CHAT_MSG_RAID_LEADER",     MapFilter)
+ChatFrame_AddMessageEventFilter("CHAT_MSG_PARTY",           MapFilter)
+ChatFrame_AddMessageEventFilter("CHAT_MSG_PARTY_LEADER",    MapFilter)
+ChatFrame_AddMessageEventFilter("CHAT_MSG_GUILD",           MapFilter)
+ChatFrame_AddMessageEventFilter("CHAT_MSG_BATTLEGROUND",    MapFilter)
+ChatFrame_AddMessageEventFilter("CHAT_MSG_LOOT",            MapFilter)
