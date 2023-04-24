@@ -2,10 +2,11 @@
     
     <Include file = "Data\Data.xml" />
     <Include file = "UI\Layout.xml" />
+    <Include file = "Ping\SEET_PING.xml" />
 
-    <Script file  = "Core.lua" />
+    <Script  file = "Core.lua" />
     <Include file = "ChatFilter\ChatFilter.xml" />
     <Include file = "SellJunk\SellJunk.xml" />
     <Include file = "UnitIcon\UnitIcon.xml" />
-    <Include file = "Test\Test.xml" />
+    <Include file = "WorldQuest\WorldQuest.xml" />
 </Ui>

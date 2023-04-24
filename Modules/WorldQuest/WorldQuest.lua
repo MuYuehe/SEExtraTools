@@ -3,7 +3,6 @@ Scorpio "SEExtraTools.core.worldquest" ""
 --======================--
 import "SEExtraTools.Layout"
 --======================--
-local extraWorldQuestTrack = Model("extraWorldQuestTrack", WorldMapFrame.ScrollContainer.Child)
 
 class "SEWorldMapButton"            (function (_ENV)
     inherit "Button"
@@ -82,22 +81,24 @@ class "SEWorldMapButtonQuest"       (function (_ENV)
             self:Show()
         end
     end}
+
+    function Container_OnEnter(self)
+        local mapID = WorldMapFrame.mapID
+        local x, y = C_TaskQuest.GetQuestLocation(self.questID, mapID)
+        C_ChatInfo.SendAddonMessage("SEET:PING", ("%s:%d(%.2f, %.2f)"):format(GetRealmName() .. "-" .. UnitName("player"), mapID, x * 100, y * 100), "WHISPER", UnitName("player"))
+    end
+
     function __ctor(self)
         self:Hide()
         self.OnEnter = function(self)
             if self.questID then
                 TaskPOI_OnEnter(self, false)
-                local x, y = C_TaskQuest.GetQuestLocation(self.questID, WorldMapFrame.mapID)
-                print(x, y)
-                if x and y then
-                    -- extraWorldQuestTrack:Show()
-                    -- extraWorldQuestTrack:SetPosition(x, y, 0)
-                end
+                Container_OnEnter(self)
             end
         end
         self.OnLeave = function(self)
             GameTooltip:Hide()
-            -- extraWorldQuestTrack:Hide()
+            FireSystemEvent("SEET_PING_ACQUIRED")
         end
         self.OnClick = function(self)
             WorldMapFrame:SetMapID(self.uiMapID)
@@ -148,17 +149,6 @@ class "SEContainerFrame"            (function (_ENV)
         -- ^.^
     end
 end)
-
-Style[extraWorldQuestTrack]                 = {
-    size                                    = Size(64, 64),
-    location                                = { Anchor("CENTER")},
-    IconTexture                             = {
-        file                                = [[Interface\Minimap\UI-Minimap-ZoomButton-Highlight]],
-        setAllPoints                        = true,
-    }
-    -- Model                                   = 
-    -- Position                                = Position(0, 0, 0),
-}
 
 
 Style.UpdateSkin("Default",                 {

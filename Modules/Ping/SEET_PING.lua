@@ -1,11 +1,14 @@
 Scorpio "SEExtraTools.core.PING" ""
 
+namespace "SEExtraTools.PING"
+
 SEETPingDataProviderMixin       = CreateFromMixins(MapCanvasDataProviderMixin)
 SEETPingPinMixin                = CreateFromMixins(MapCanvasPinMixin)
 
 _G.SEETPingPinMixin = SEETPingPinMixin
 
-CURRENT_PING = {}
+CURRENT_PING                    = {}
+SORT_USER_PING                  = List()
 
 SEET_PING_PREFIX = "SEET:PING"
 
@@ -44,17 +47,30 @@ end
 
 function SEETPingPinMixin:OnAcquired(user, map, x, y)
 
-    self.sender = user
-    self.map = map
-    self.x = x
-    self.y = y
-    self.endtime                = GetTime() + 2
-
-    CURRENT_PING[self] = true
-
+    self.sender                 = user
+    self.map                    = map
+    self.x                      = x
+    self.y                      = y
+    self.endtime                = GetTime()
     self:SetPosition(x/100, y/100)
 
-    FireSystemEvent("SEET_PING_ACQUIRED")
+    CURRENT_PING[self] = true
+    SORT_USER_PING:Clear()
+
+    for ping in pairs(CURRENT_PING) do
+        if ping.sender == user then
+            SORT_USER_PING:Insert(ping.endtime)
+        end
+    end
+
+    if #SORT_USER_PING > 1 then
+        SORT_USER_PING:Sort()
+        local last              = SORT_USER_PING[#SORT_USER_PING - 1]
+        for ping in pairs(CURRENT_PING) do
+            local map   = ping:GetMap()
+            if map then map:RemovePin(ping) end
+        end
+    end
 end
 
 function SEETPingPinMixin:OnReleased()
@@ -65,7 +81,6 @@ function SEETPingPinMixin:OnReleased()
     self.x                      = nil
     self.y                      = nil
     self.endtime                = nil
-
 end
 
 __Service__(true)
@@ -74,20 +89,15 @@ function ProcessPing()
         NextEvent("SEET_PING_ACQUIRED")
 
         local hasping           = true
-
         while hasping do
             hasping             = false
-            local now           = GetTime()
 
             for ping in pairs(CURRENT_PING) do
                 hasping         = true
-                if ping.endtime and ping.endtime <= now then
-                    local map   = ping:GetMap()
-                    if map then map:RemovePin(ping) end
-                end
-            end
 
-            Delay(2)
+                local map   = ping:GetMap()
+                if map then map:RemovePin(ping) end
+            end
         end
     end
 end
@@ -112,7 +122,7 @@ end
 
 C_ChatInfo.RegisterAddonMessagePrefix(SEET_PING_PREFIX)
 
-WorldMapFrame.ScrollContainer:HookScript("OnMouseDown", Container_OnMouseDown)
-WorldMapFrame.ScrollContainer:HookScript("OnMouseUp", Container_OnMouseUp)
+-- WorldMapFrame.ScrollContainer:HookScript("OnMouseDown", Container_OnMouseDown)
+-- WorldMapFrame.ScrollContainer:HookScript("OnMouseUp", Container_OnMouseUp)
 
 WorldMapFrame:AddDataProvider(CreateFromMixins({}, SEETPingDataProviderMixin))

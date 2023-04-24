@@ -162,6 +162,7 @@ function OnEnable(self)
         74794,
         74838,
         69949,
+        73147,
         67005,
         70439,
         70071,
@@ -181,6 +182,15 @@ function OnEnable(self)
         72022,
         73080,
         73146,
+        73083,
+        70419,
+        70429,
+        70433,
+        70417,
+        70646,
+        70638,
+        69941,
+        70629,
     }
     for i, v in ipairs(MajorData) do
         local seWorldMapMajorButton = SEWorldMapButtonMajor("seWorldMapMajorButton" .. v["factionID"], seMajorButtonContainer)
@@ -193,7 +203,6 @@ function OnEnable(self)
         seWorldMapItemButton.questID = v
     end
 end
-
 
 __SecureHook__ (WorldMapFrame, "OnMapChanged")
 function Hook_WorldMapFrame_OnMapChanged()
@@ -216,9 +225,9 @@ function EVENT_QUEST_DATA_LOAD_RESULT(questID, success)
     end
 
     local name, factionID = C_TaskQuest.GetQuestInfoByQuestID(questID)
-    if not factionID or factionID == "" then
-        return
-    end
+    -- if not factionID or factionID == "" then
+    --     return
+    -- end
     local seWorldMapItemButton = SEWorldMapButtonQuest("seWorldMapItemButton" .. questID, seWorldQuestFrameContainer)
     seWorldMapItemButton.uiMapID = uiMapID
     seWorldMapItemButton.factionID = factionID
@@ -230,8 +239,9 @@ end
 
 -- __SecureHook__ "TaskPOI_OnEnter"
 -- function Hook_TaskPOI_OnEnter(self, ...)
---     local point, relativeTo, relativePoint, offsetX, offsetY = self:GetPoint()
+--     -- local point, relativeTo, relativePoint, offsetX, offsetY = self:GetPoint()
 --     -- print(point, relativePoint, offsetX, offsetY)
+--     print(self.questID)
 -- end
 
 
