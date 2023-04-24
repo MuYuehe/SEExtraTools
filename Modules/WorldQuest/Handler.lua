@@ -120,7 +120,7 @@ function OnEnable(self)
         { ["factionID"] = 2507,  ["texture"] = [[MajorFactions_Icons_Expedition512]],    ["ownerMap"] = 1978 },
         { ["factionID"] = 2510,  ["texture"] = [[MajorFactions_Icons_Valdrakken512]],    ["ownerMap"] = 1978 },
         { ["factionID"] = 2511,  ["texture"] = [[MajorFactions_Icons_Tuskarr512]],       ["ownerMap"] = 1978 },
-        { ["factionID"] = 2523,  ["texture"] = [[Interface/AddOns/SEExtraTools/Modules/Image/ovtrqrme.png]],       ["ownerMap"] = 1978 },
+        { ["factionID"] = 2523,  ["texture"] = [[talents-animations-class-evoker]],      ["ownerMap"] = 1978 },
         -- 9.0
         -- { ["factionID"] = 1536, ["texture"] = [[shadowlands-landingbutton-NightFae-up]], ["ownerMap"] = 1550 },
         -- { ["factionID"] = 1533, ["texture"] = [[shadowlands-landingbutton-venthyr-up]],  ["ownerMap"] = 1550 },

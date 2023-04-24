@@ -8,7 +8,7 @@ class "SEWorldMapButton"            (function (_ENV)
     inherit "Button"
 
     __Observable__()
-    property "IconPoints"   { type = Table, default = { Anchor("TOPLEFT", 6, -6) } }
+    property "IconPoints"   { type = Table, default = { Anchor("CENTER", 0, 0) } }
 
     property "factionID"    { type = Number }
     __Observable__()
@@ -17,10 +17,10 @@ class "SEWorldMapButton"            (function (_ENV)
 
     function __ctor(self)
         self.OnMouseDown = function(self)
-            self.IconPoints = { Anchor("TOPLEFT", 8, -8) }
+            self.IconPoints = { Anchor("CENTER", 2, -2) }
         end
         self.OnMouseUp = function(self)
-            self.IconPoints = { Anchor("TOPLEFT", 6, -6) }
+            self.IconPoints = { Anchor("CENTER", 0, 0) }
         end
     end
 end)
@@ -43,6 +43,7 @@ class "SEWorldMapButtonMajor"       (function (_ENV)
     end}
     property "currentMap"           { type = Number, handler = function(self, id)
         self:SetAlpha(0.5)
+        self.chooseMajor = 0
         self:SetShown(IsQuestInCurrentMap(id, self.ownerMap))
     end}
 
@@ -74,6 +75,7 @@ class "SEWorldMapButtonQuest"       (function (_ENV)
         self:SetShown(IsQuestInCurrentMap(self.uiMapID, WorldMapFrame.mapID) and (id == -1 or id == self.factionID))
     end}
     property "currentMap"       { type = Number, handler = function(self, id)
+        self.chooseMajor = 0
         self:Hide()
     end}
     property "hasQuest"         { type = Number, handler = function(self, id)
